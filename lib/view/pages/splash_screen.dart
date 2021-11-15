@@ -16,7 +16,7 @@ class _SplashScreenViewsState extends State<SplashScreenViews> {
       () => Navigator.pushReplacement(
         context,
         PageRouteBuilder(
-          pageBuilder: (context, a1, a2) => const WelcomePage(),
+          pageBuilder: (context, a1, a2) => const WelcomePageViews(),
         ),
       ),
     );
