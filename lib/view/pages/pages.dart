@@ -4,16 +4,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:spotify_clone/controller/auth_controller.dart';
-
-part 'home/home_page.dart';
+import 'package:spotify_clone/model/model.dart';
+import 'package:spotify_clone/view/theme/themes.dart';
+import 'package:spotify_clone/view/widget/bottom_nav_home.dart';
+import 'package:spotify_clone/view/widget/card_frequent_views.dart';
 
 part 'auth/login_page.dart';
-
 part 'auth/welcome_page.dart';
-
+part 'home/home_page.dart';
 part 'splash_screen.dart';
 
-Route _createRouteToLogin() {
+Route createRouteToLogin() {
   return PageRouteBuilder(
     pageBuilder: (context, a, b) => LoginPageViews(),
     transitionDuration: Duration(milliseconds: 500),
@@ -34,7 +35,7 @@ Route _createRouteToLogin() {
   );
 }
 
-Route _createRouteBackToWelcome() {
+Route createRouteBackToWelcome() {
   return PageRouteBuilder(
     pageBuilder: (context, a, b) => WelcomePageViews(),
     transitionDuration: Duration(milliseconds: 500),
@@ -55,6 +56,6 @@ Route _createRouteBackToWelcome() {
   );
 }
 
-Route _createRouteToHomeNoAnim() {
+Route createRouteToHomeNoAnim() {
   return PageRouteBuilder(pageBuilder: (context, a, b) => HomePageViews());
 }

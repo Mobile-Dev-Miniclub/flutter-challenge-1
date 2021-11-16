@@ -18,27 +18,28 @@ class _LoginPageViewsState extends State<LoginPageViews> {
   Widget build(BuildContext context) {
     print('/Login');
 
-    bool checkUser =
-        _loginController.usernameEmailController.value.text.isNotEmpty;
-    bool checkPass = _loginController.passwordController.value.text.isNotEmpty;
-
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         leading: GestureDetector(
-          onTap: () => Navigator.pop(context, _createRouteBackToWelcome()),
+          onTap: () => Navigator.pop(context, createRouteBackToWelcome()),
           child: Icon(CupertinoIcons.arrow_left),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      backgroundColor: Color.fromRGBO(18, 18, 18, 1),
+      backgroundColor: Themes.darkColor,
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(16),
           child: Form(
             key: _loginFormKey,
             onChanged: () {
+              bool checkUser = _loginController
+                  .usernameEmailController.value.text.isNotEmpty;
+              bool checkPass =
+                  _loginController.passwordController.value.text.isNotEmpty;
+
               if (checkUser && checkPass)
                 _loginController.isEnabled.value = true;
               else
@@ -46,23 +47,25 @@ class _LoginPageViewsState extends State<LoginPageViews> {
 
               print('isEnabled ${_loginController.isEnabled.value}');
             },
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                buildColumnUsernameEmail(),
-                SizedBox(height: 48),
-                buildColumnPassword(),
-                SizedBox(height: 52),
-                buildContainerLoginButton(),
-                SizedBox(height: 32),
-                buildContainerLoginWithoutPassButton(),
-              ],
-            ),
+            child: Obx(() => buildComponentLogin()),
           ),
         ),
       ),
     );
   }
+
+  Column buildComponentLogin() => Column(
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: [
+      buildColumnUsernameEmail(),
+      SizedBox(height: 48),
+      buildColumnPassword(),
+      SizedBox(height: 52),
+      buildContainerLoginButton(),
+      SizedBox(height: 32),
+      buildContainerLoginWithoutPassButton(),
+    ],
+  );
 
   Column buildColumnUsernameEmail() {
     return Column(
@@ -126,7 +129,7 @@ class _LoginPageViewsState extends State<LoginPageViews> {
         ),
         SizedBox(height: 4),
         TextFormField(
-          obscureText: true,
+          obscureText: _loginController.isHidden.value,
           controller: _loginController.passwordController,
           cursorColor: Colors.white,
           validator: (val) =>
@@ -151,9 +154,21 @@ class _LoginPageViewsState extends State<LoginPageViews> {
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
             ),
-            suffixIcon: Icon(
-              Icons.visibility,
-              color: Colors.white,
+            suffixIcon: Obx(
+              () => GestureDetector(
+                onTap: () {
+                  _loginController.togglePasswordView();
+                },
+                child: _loginController.isHidden.value
+                    ? Icon(
+                        Icons.visibility,
+                        color: Colors.white,
+                      )
+                    : Icon(
+                        Icons.visibility_off,
+                        color: Colors.white,
+                      ),
+              ),
             ),
           ),
           onChanged: (pass) {
@@ -165,56 +180,53 @@ class _LoginPageViewsState extends State<LoginPageViews> {
   }
 
   Widget buildContainerLoginButton() {
-    return Obx(
-      () => Container(
-        height: 56,
-        width: 125,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          color: _loginController.isEnabled.value
-              ? Colors.transparent
-              : Colors.white24,
-        ),
-        child: _loginController.isEnabled.value
-            ? ElevatedButton(
-                onPressed: () => Navigator.pushReplacement(
-                  context,
-                  _createRouteToHomeNoAnim(),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Text(
-                    'Log in',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  elevation: 0,
-                  primary: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                ),
-              )
-            : Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 18, horizontal: 22),
-                child: Center(
-                  child: Text(
-                    'Log in',
-                    style: TextStyle(
-                      color: Colors.black26,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                    ),
+    return Container(
+      height: 56,
+      width: 125,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30),
+        color: _loginController.isEnabled.value
+            ? Colors.transparent
+            : Colors.white24,
+      ),
+      child: _loginController.isEnabled.value
+          ? ElevatedButton(
+              onPressed: () => Navigator.pushReplacement(
+                context,
+                createRouteToHomeNoAnim(),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Text(
+                  'Log in',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
-      ),
+              style: ElevatedButton.styleFrom(
+                elevation: 0,
+                primary: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+              ),
+            )
+          : Padding(
+              padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 22),
+              child: Center(
+                child: Text(
+                  'Log in',
+                  style: TextStyle(
+                    color: Colors.black26,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
     );
   }
 
@@ -236,7 +248,7 @@ class _LoginPageViewsState extends State<LoginPageViews> {
           primary: Colors.black,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
-            side: BorderSide(color: Color.fromRGBO(46, 46, 46, 1), width: 1),
+            side: BorderSide(color: Themes.darkColor2, width: 1),
           ),
         ),
       );

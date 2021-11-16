@@ -65,7 +65,8 @@ flutter:
     - assets/images/search_black.png
     - assets/images/Toon.png
     - assets/images/welcome_banner.jpg
-    - assets/images/logo_white.png
+    - assets/images/gaming.jpg
+    - assets/images/silent.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

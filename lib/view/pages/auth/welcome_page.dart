@@ -26,8 +26,8 @@ class _WelcomePageViewsState extends State<WelcomePageViews> {
               gradient: LinearGradient(
                 colors: [
                   Colors.black,
-                  Color.fromRGBO(18, 18, 18, 0.95),
-                  Color.fromRGBO(18, 18, 18, 0.2),
+                  Themes.darkColor.withOpacity(0.95),
+                  Themes.darkColor.withOpacity(0.2),
                 ],
                 begin: Alignment.bottomCenter,
                 end: Alignment.topCenter,
@@ -53,7 +53,7 @@ class _WelcomePageViewsState extends State<WelcomePageViews> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
-          primary: Color.fromRGBO(30, 215, 96, 1),
+          primary: Themes.spotifyLightGreen,
           fixedSize: Size(
             MediaQuery.of(context).size.width,
             50,
@@ -82,7 +82,7 @@ class _WelcomePageViewsState extends State<WelcomePageViews> {
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
-            side: BorderSide(color: Color.fromRGBO(46, 46, 46, 1), width: 1),
+            side: BorderSide(color: Themes.darkColor2, width: 1),
           ),
           primary: Colors.transparent,
           fixedSize: Size(
@@ -117,7 +117,7 @@ class _WelcomePageViewsState extends State<WelcomePageViews> {
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30),
-              side: BorderSide(color: Color.fromRGBO(46, 46, 46, 1), width: 1)),
+              side: BorderSide(color: Themes.darkColor2, width: 1)),
           primary: Colors.transparent,
           fixedSize: Size(
             MediaQuery.of(context).size.width,
@@ -152,7 +152,7 @@ class _WelcomePageViewsState extends State<WelcomePageViews> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
             side: BorderSide(
-              color: Color.fromRGBO(46, 46, 46, 1),
+              color: Themes.darkColor2,
               width: 1,
             ),
           ),
@@ -167,7 +167,7 @@ class _WelcomePageViewsState extends State<WelcomePageViews> {
   GestureDetector buildAccountLogin() => GestureDetector(
         onTap: () => Navigator.push(
           context,
-          _createRouteToLogin(),
+          createRouteToLogin(),
         ),
         child: Text(
           'Log in',

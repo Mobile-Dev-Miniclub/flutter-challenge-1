@@ -12,6 +12,7 @@ class AuthController extends GetxController {
 
   void togglePasswordView() {
     isHidden.value = !isHidden.value;
+    print('isHidden: ${isHidden.value}');
   }
 
   void isAlreadyLogin() {
