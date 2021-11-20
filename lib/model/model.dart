@@ -7,6 +7,16 @@ class SongCover {
   });
 }
 
+class SongRecommendationCover {
+  String assetName, name, desc;
+
+  SongRecommendationCover({
+    required this.assetName,
+    required this.name,
+    required this.desc,
+  });
+}
+
 List<SongCover> listDummyFreq = [
   SongCover(
     assetName: 'assets/images/Toon.png',
@@ -34,17 +44,20 @@ List<SongCover> listDummyFreq = [
   ),
 ];
 
-List<SongCover> listDummyTopRec = [
-  SongCover(
+List<SongRecommendationCover> listDummyTopRec = [
+  SongRecommendationCover(
     assetName: 'assets/images/Toon.png',
     name: 'Sleepy Rainy LoFi for Study',
+    desc: 'Sleepy song for your sleepy soul',
   ),
-  SongCover(
+  SongRecommendationCover(
     assetName: 'assets/images/Anime.jpg',
     name: 'Anime Nostalgia Series',
+    desc: 'Lovely Anime Collection',
   ),
-  SongCover(
+  SongRecommendationCover(
     assetName: 'assets/images/Corpse.PNG',
     name: 'Corpse Husband Horrorcore Playlist',
+    desc: 'All Corpse Husband singles',
   ),
 ];

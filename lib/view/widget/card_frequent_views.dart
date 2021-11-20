@@ -12,23 +12,17 @@ class CardFrequentViews extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      borderOnForeground: false,
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
+    return Container(
+      margin: EdgeInsets.all(4),
+      width: 90,
+      height: 72,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        color: Themes.darkColor2,
       ),
-      child: Container(
-        width: 180,
-        height: 72,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          color: Themes.darkColor2,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.only(right: 8),
-          child: buildCardComponent(assetName, name),
-        ),
+      child: Padding(
+        padding: const EdgeInsets.only(right: 4),
+        child: buildCardComponent(assetName, name),
       ),
     );
   }

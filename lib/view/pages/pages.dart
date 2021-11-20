@@ -8,6 +8,7 @@ import 'package:spotify_clone/model/model.dart';
 import 'package:spotify_clone/view/theme/themes.dart';
 import 'package:spotify_clone/view/widget/bottom_nav_home.dart';
 import 'package:spotify_clone/view/widget/card_frequent_views.dart';
+import 'package:spotify_clone/view/widget/card_recommended_views.dart';
 
 part 'auth/login_page.dart';
 part 'auth/welcome_page.dart';

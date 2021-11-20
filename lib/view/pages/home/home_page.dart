@@ -8,11 +8,11 @@ class HomePageViews extends StatelessWidget {
     print('/Home');
 
     return Scaffold(
+      extendBody: true,
+      extendBodyBehindAppBar: true,
       body: SingleChildScrollView(
-        clipBehavior: Clip.none,
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 16),
-          height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -32,6 +32,9 @@ class HomePageViews extends StatelessWidget {
               SizedBox(height: 26),
               buildContainerHomeAppbar(context),
               buildListFrequenceGrid(),
+              buildListArtistTopRecommendation(context),
+              SizedBox(height: 24),
+              buildListTopRecommendation(context),
             ],
           ),
         ),
@@ -72,7 +75,7 @@ class HomePageViews extends StatelessWidget {
   Widget buildListFrequenceGrid() {
     return GridView.count(
       shrinkWrap: true,
-      childAspectRatio: 2.5,
+      childAspectRatio: 2.7,
       crossAxisCount: 2,
       mainAxisSpacing: 1,
       crossAxisSpacing: 5.5,
@@ -90,12 +93,97 @@ class HomePageViews extends StatelessWidget {
     );
   }
 
-  Widget buildListTopRecommendation() {
-    return ListView.builder(
-      itemCount: listDummyTopRec.length,
-      itemBuilder: (context, index) {
-        return Card();
-      },
+  Widget buildListTopRecommendation(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Made For Andzzz',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 26,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Container(
+          width: MediaQuery.of(context).size.width,
+          height: 220,
+          child: ListView.builder(
+            shrinkWrap: true,
+            itemCount: listDummyTopRec.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              return Container(
+                padding: EdgeInsets.only(top: 8, right: 16),
+                child: CardRecommendationViews(
+                  assetName: listDummyTopRec[index].assetName,
+                  title: listDummyTopRec[index].name,
+                  desc: listDummyTopRec[index].desc,
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget buildListArtistTopRecommendation(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            CircleAvatar(
+              radius: 24,
+              backgroundImage: AssetImage('assets/images/Corpse.PNG'),
+            ),
+            SizedBox(width: 8),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'MORE LIKE',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w200,
+                  ),
+                ),
+                SizedBox(height: 4),
+                Text(
+                  'Corpse',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+        SizedBox(height: 8),
+        Container(
+          width: MediaQuery.of(context).size.width,
+          height: 220,
+          child: ListView.builder(
+            shrinkWrap: true,
+            itemCount: listDummyTopRec.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              return Container(
+                padding: EdgeInsets.only(top: 8, right: 16),
+                child: CardRecommendationViews(
+                  assetName: listDummyTopRec[index].assetName,
+                  title: listDummyTopRec[index].name,
+                  desc: listDummyTopRec[index].desc,
+                ),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }
